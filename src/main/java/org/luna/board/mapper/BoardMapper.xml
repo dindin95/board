@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 타입알리아스로 할 수 없음 -->
+
+<mapper namespace="org.luna.board.mapper.BoardMapper">
+
+	<!-- 전체조회 -->
+	<select id="selectAll"
+		resultType="org.luna.board.domain.BoardVO">
+		select * from tbl_board
+	</select>
+
+
+	<!-- 게시글 하나 조회 -->
+	<select id="selectOne"
+		resultType="org.luna.board.domain.BoardVO">
+		select * from tbl_board where bno = #{bno}
+	</select>
+
+
+
+	<!-- 게시글 등록 -->
+	<insert id="register"
+		parameterType="org.luna.board.domain.BoardVO">
+<![CDATA[
+insert into tbl_board (title, content, writer) 
+values (#{title}, #{content}, #{writer}) 
+]]>
+	</insert>
+
+
+	<!-- 게시글 삭제 -->
+	<delete id="remove"
+		parameterType="org.luna.board.domain.BoardVO">
+		delete from tbl_board where bno = #{bno}
+	</delete>
+
+
+	<!-- 게시글 수정 -->
+	<update id="modify"
+		parameterType="org.luna.board.domain.BoardVO">
+<![CDATA[
+update tbl_board set title=#{title}, content=#{content}, updatedate=now()
+where bno =#{bno}
+]]>
+	</update>
+
+
+
+
+</mapper>
